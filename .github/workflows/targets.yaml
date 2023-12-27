@@ -153,12 +153,3 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: .
-
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Render and Publish to Netlify
-        uses: quarto-dev/quarto-actions/publish@v2
-        with:
-          target: netlify
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
