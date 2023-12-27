@@ -26,7 +26,7 @@
 name: targets
 on:
   schedule:
-    - cron: "/15 * * * *" # UTC
+    - cron: "*/15 * * * *" # UTC
 
 jobs:
   targets:

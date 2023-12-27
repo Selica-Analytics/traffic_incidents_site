@@ -3,7 +3,7 @@ output: html_document
 ---
 ## New Traffic Incidents in the Last 90 Minutes
 
-#### Information is updated every 30 minutes
+#### Information is updated every 15 minutes
 
 License: Contains information licensed under the Open Government Licence – City of Calgary.
 
