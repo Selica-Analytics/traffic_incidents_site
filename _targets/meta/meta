@@ -1,0 +1,14 @@
+name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
+analyze_data|stem|9fd24b9eda5ab2e4|3c099db149fd42e8|56ca46dcb0ca3225|-2043197207|traffic_incidents.html*traffic_incidents.Rmd|t19718.03176814s|3d4f1a900b26c345|1292073|file|local|vector|||0.299||
+beginning_time|object|2bb69b2a61687188|||||||||||||||
+create_map|function|18e09fd493d288be|||||||||||||||
+current_date_time|object|6b74ad09b6da31f2|||||||||||||||
+data_wrangle|stem|c47ca6a89a72b6bd|fb81556e4b605b5e|656c4d9d3d564502|1663673996||t19718.0317649921s|a698f91831686738|447|rds|local|vector|||0.337||
+download_data|stem|c05b334b835f0286|755959aa5d50c0be|4dae582f3991be3a|-1209259137|/tmp/RtmpSdmaOo/file3303348b04708|t19718.0317596684s|687aa995dd02c05d|11473875|file|local|vector|||1.99||
+download_file|function|b71e11bf3798f637|||||||||||||||
+icons|object|49cdecbb2bd94a24|||||||||||||||
+plot_traffic_incidents|stem|21e931d7599c3bd2|f68defc82348f8f6|a8b982f4c884dee5|1044130829||t19718.0315201483s|b7fddb658ba3f094|4100|rds|local|vector|||0.003||
+read_data|stem|080a6bf3cf046074|0d51d4eecf12e599|885a5d4e4797d753|1713363644||t19718.0310601711s|de1f6ea62fb10d47|2460084|rds|local|vector|||0.158||
+time_frame_min|object|a3c4b57a6f0085ec|||||||||||||||
+traf_constr_wrangling|function|10edbd13d5b1c85a|||||||||||||||
+url|object|0d90dedabf653050|||||||||||||||

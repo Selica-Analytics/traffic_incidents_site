@@ -62,6 +62,6 @@ list(
     tarchetypes::tar_render(
         analyze_data,
         "traffic_incidents.Rmd",
-        output_dir = "/home/traffic/pipeline_output"
+        output_dir = "."
     )
 )
