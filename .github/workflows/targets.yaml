@@ -25,8 +25,10 @@
 
 name: targets
 on:
-  schedule:
-    - cron: "*/30 * * * *" # UTC
+#  schedule:
+#    - cron: "*/30 * * * *" # UTC
+    push:
+        branches: main
 
 jobs:
   targets:
@@ -150,4 +152,13 @@ jobs:
         uses: actions/upload-artifact@targets-runs
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: _site/
+          path: .
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Render and Publish to Netlify
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: netlify
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}

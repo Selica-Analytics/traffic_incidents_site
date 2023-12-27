@@ -1,0 +1,4 @@
+- source: traffic_incidents.Rmd
+  netlify:
+    - id: 351eb900-e131-49de-87be-21b79b9ee7ab
+      url: 'https://effortless-gecko-84a297.netlify.app'
