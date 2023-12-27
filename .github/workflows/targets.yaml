@@ -1,7 +1,7 @@
 # MIT License
 # Copyright (c) 2021 Eli Lilly and Company
 # Author: William Michael Landau (will.landau at gmail)
-# Written with help from public domain (CC0 1.0 Universal) workflow files by Jim Hester:
+# Written with help from public dotargets-runs (CC0 1.0 Universal) workflow files by Jim Hester:
 # * https://github.com/r-lib/actions/blob/master/examples/check-full.yaml
 # * https://github.com/r-lib/actions/blob/master/examples/blogdown.yaml
 #
@@ -26,7 +26,7 @@
 name: targets
 on:
   schedule:
-    - cron: "*/15 * * * *" # UTC
+    - cron: "*/30 * * * *" # UTC
 
 jobs:
   targets:
@@ -147,7 +147,7 @@ jobs:
 
       - name: Post failure artifact
         if: failure()
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@targets-runs
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: _site/
