@@ -27,7 +27,7 @@ name: targets
 on:
   push:
     branches:
-      - gitops-pipeline
+      - main
 
 jobs:
   targets:
