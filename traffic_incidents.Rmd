@@ -25,6 +25,6 @@ License: Contains information licensed under the Open Government Licence – Cit
 
 
 ```{r createMap}
-targets::tar_read(plot_traffic_incidents)
+#targets::tar_read(plot_traffic_incidents)
 ```
 
