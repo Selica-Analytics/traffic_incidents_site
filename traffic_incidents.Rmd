@@ -21,6 +21,47 @@ last_update <- Sys.time()
 License: Contains information licensed under the Open Government Licence – City of Calgary.
 
 
+```{r}
+library(httr2)
+library(leaflet)
+library(dplyr)
+library(lubridate)
+library(janitor)
+library(fontawesome)
+
+time_frame_min <- 720
+current_date_time <- Sys.time()
+beginning_time <- current_date_time - lubridate::minutes(time_frame_min)
+
+httr2::req_perform(
+        request("https://data.calgary.ca/resource/35ra-9556.csv?$limit=10000000"),
+        path = "00_data/yyc_traffic_incidents.csv"
+        )
+
+file_path <- "00_data/yyc_traffic_incidents.csv"
+
+raw_traffic_incidents <- readr::read_csv(file_path)
+
+#Data processing
+traffic_incidents <- raw_traffic_incidents |>
+    janitor::clean_names() |>
+    mutate(
+    start_dt = ymd_hms(start_dt,tz = "Canada/Mountain"),
+    content = paste(description,incident_info, sep = "<br/>"),
+    last_updated = ymd_hms(Sys.time(),tz = "Canada/Mountain")
+        ) |>
+    filter(start_dt >= beginning_time)
+
+# glimpse(traffic_incidents)
+
+icons <- awesomeIconList(
+  walk = makeAwesomeIcon(text = fa("car-burst"), iconColor = "black", markerColor = "red")
+)
+
+leaflet(traffic_incidents) |>
+ addTiles() |>
+    addAwesomeMarkers(~longitude, ~latitude, popup = ~content,icon=icons)
+```
 
 
 
