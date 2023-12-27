@@ -1,7 +1,7 @@
 # MIT License
 # Copyright (c) 2021 Eli Lilly and Company
 # Author: William Michael Landau (will.landau at gmail)
-# Written with help from public domain (CC0 1.0 Universal) workflow files by Jim Hester:
+# Written with help from public dotargets-runs (CC0 1.0 Universal) workflow files by Jim Hester:
 # * https://github.com/r-lib/actions/blob/master/examples/check-full.yaml
 # * https://github.com/r-lib/actions/blob/master/examples/blogdown.yaml
 #
@@ -26,7 +26,7 @@
 name: targets
 on:
   schedule:
-    - cron: "*/15 * * * *" # UTC
+    - cron: "*/30 * * * *" # UTC
 
 jobs:
   targets:
@@ -89,22 +89,22 @@ jobs:
 
       - name: Check if previous runs exists
         id: runs-exist
-        run: git ls-remote --exit-code --heads origin main
+        run: git ls-remote --exit-code --heads origin targets-runs
         continue-on-error: true
 
       - name: Checkout previous run
         if: steps.runs-exist.outcome == 'success'
         uses: actions/checkout@v2
         with:
-          ref: main
+          ref: targets-runs
           fetch-depth: 1
-          path: .main
+          path: .targets-runs
 
       - name: Restore output files from the previous run
         if: steps.runs-exist.outcome == 'success'
         run: |
-          for (dest in scan(".main/.targets-files", what = character())) {
-            source <- file.path(".main", dest)
+          for (dest in scan(".targets-runs/.targets-files", what = character())) {
+            source <- file.path(".targets-runs", dest)
             if (!file.exists(dirname(dest))) dir.create(dirname(dest), recursive = TRUE)
             if (file.exists(source)) file.rename(source, dest)
           }
@@ -119,14 +119,14 @@ jobs:
 
       - name: Create the runs branch if it does not already exist
         if: steps.runs-exist.outcome != 'success'
-        run: git checkout --orphan main
+        run: git checkout --orphan targets-runs
 
       - name: Put the worktree in the runs branch if the latter already exists
         if: steps.runs-exist.outcome == 'success'
         run: |
           rm -r .git
-          mv .main/.git .
-          rm -r .main
+          mv .targets-runs/.git .
+          rm -r .targets-runs
 
       - name: Upload latest run
         run: |
@@ -139,15 +139,15 @@ jobs:
             git add --force $file
           done
           git commit -am "Run pipeline"
-          git push origin main
+          git push origin targets-runs
 
       - name: Prepare failure artifact
         if: failure()
-        run: rm -rf .git .github .targets-files .main
+        run: rm -rf .git .github .targets-files .targets-runs
 
       - name: Post failure artifact
         if: failure()
-        uses: actions/upload-artifact@main
+        uses: actions/upload-artifact@targets-runs
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: _site/
