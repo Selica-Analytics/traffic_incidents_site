@@ -25,9 +25,8 @@
 
 name: targets
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: "/15 * * * *" # UTC
 
 jobs:
   targets:
